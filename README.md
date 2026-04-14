@@ -157,5 +157,6 @@ collection.remove(u3)
 print("\nDespués de eliminar a Luis:")
 for user in collection.get_all():
     print(user)
+```
 
 ![demo](images/lab02/demolab2.png)
