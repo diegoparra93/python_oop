@@ -12,150 +12,74 @@
 
 # Результат лабораторной
 
-В репозитории должны появиться:
+## Демонстрация
 
+### Код программы (demo.py)
+
+```python
+from user import User
+
+print("=== USER CLASS DEMONSTRATION ===\n")
+
+# 1. CREATING VALID OBJECTS
+try:
+    diego = User("Diego", "O+", 75.5, 25, "diego@email.com", "Madrid")
+    daniel = User("Daniel", "A-", 80.0, 17, "daniel@email.com", "Barcelona")
+    print("Users created successfully")
+except ValueError as e:
+    print(f"Unexpected error: {e}")
+
+# 2. DISPLAY USER INFORMATION (__str__)
+print("\n--- USER INFORMATION ---")
+print(diego)
+print(daniel)
+
+# 3. CLASS ATTRIBUTE
+print("\n--- CLASS ATTRIBUTE ---")
+print(f"Total users created: {User.total_users}")
+
+# 4. BUSINESS METHOD (is_adult)
+print("\n--- AGE VERIFICATION ---")
+if diego.is_adult():
+    print(f"{diego._name} is an adult")
+else:
+    print(f"{diego._name} is not an adult")
+
+if daniel.is_adult():
+    print(f"{daniel._name} is an adult")
+else:
+    print(f"{daniel._name} is not an adult")
+
+# 5. COMPARISON (__eq__)
+print("\n--- USER COMPARISON ---")
+if diego == daniel:
+    print("Diego and Daniel are the same user (same email)")
+else:
+    print("Diego and Daniel are different users")
+
+# 6. VALIDATION DEMONSTRATION (with try/except)
+print("\n--- VALIDATION DEMONSTRATION ---")
+
+try:
+    invalid_user = User("Error", "O+", 70, 30, "invalid-email", "Seville")
+except ValueError as e:
+    print(f"Error captured (invalid email): {e}")
+
+try:
+    invalid_user = User("Error", "O+", 70, 30, "test@email.com", "")
+except ValueError as e:
+    print(f"Error captured (empty city): {e}")
+
+try:
+    invalid_user = User("Error", "O+", 70, -5, "test@email.com", "Valencia")
+except ValueError as e:
+    print(f"Error captured (negative age): {e}")
+
+print("\n=== END OF DEMONSTRATION ===")
+---
 ```
-python_labs/
-├─ README.md
-├─ src/
-│  ├─ lib/
-│  ├─ lab01/
-│  │   ├─ model.py
-│  │   └─ demo.py
-└─ images/
-   └─ lab01/
-```
-
-# Реализованный класс
-
-В рамках лабораторной реализован пользовательский класс из выбранной предметной области.
-
-### Реализовано:
-
-* Закрытые атрибуты экземпляра
-* Конструктор с проверкой входных данных
-* Свойства (`@property`)
-* Проверки корректности данных
-* Магические методы:
-
-  * `__str__`
-  * `__repr__`
-  * `__eq__`
-* Бизнес-методы
-
----
-
-# Предметная область – Вариант
-
-> Свой вариант смотрите тут: [Ваши варианты и оценки](https://docs.google.com/spreadsheets/d/1aLwQS_7pWVBUzfVK4PNuJemjhfwo7GMfLrUJsk7VtQU/edit?usp=sharing)
-
-> Описание варианта тут: [тыыыык](./variants.md)
-
----
-
-# Задание на 3
-
-## Требования
-
-1. Один пользовательский класс.
-2. Минимум 4 атрибута.
-3. Закрытые поля (`_attribute`).
-4. Конструктор с базовой проверкой данных.
-5. Свойства (`@property`) для чтения.
-6. Минимум:
-
-   * `__str__`
-   * `__eq__`
-7. Один простой бизнес-метод.
-
 ## Демонстрация
 
-В `demo.py` должно быть:
+Результат выполнения программы:
 
-* создание объекта
-* вывод через `print`
-* сравнение двух объектов
-* пример некорректного создания (через `try/except`)
-
-## Проверки
-
-* Проверка типа данных.
-* Проверка базовых ограничений (например, число ≥ 0).
-
-
----
-
-# Задание на 4
-## Требования
-
-0. Реализовать все из "Задания на 3"
-1. Реализовать:
-   * `__repr__`
-   * минимум один setter с валидацией
-2. Добавить атрибут класса.
-3. Добавить второй бизнес-метод.
-4. Улучшить форматирование вывода (`f-string`, формат чисел и т.п.).
-5. Валидация должна быть:
-
-   * не только на тип,
-   * но и на логическую корректность (диапазон, пустая строка, и т.д.).
-
-## Демонстрация
-
-* изменение свойства через setter
-* проверка, что ограничение работает
-* доступ к атрибуту класса через класс и экземпляр
-
-
-# Задание на 5
-## Требования
-
-0. Реализовать все из заданий "на 3" и "на 4"
-1. Реализовать валидацию как отдельный метод
-    Логика проверки должна быть:
-    * вынесена в отдельные методы (`_validate_gpa`, `_validate_name`, …)
-
-    * не дублироваться в коде
-
-2. Логическое состояние объекта
-    Добавить:
-
-    * метод изменения состояния (например: `activate()`, `close()`, `upgrade()`)
-3. Поведение, зависящее от состояния
-    Объект должен:
-
-    * менять поведение в зависимости от своих данных
-    * или ограничивать операции при определённом состоянии
-
-    Пример:
-
-    * нельзя повысить курс выше 6
-    * нельзя снять деньги больше баланса
-    * нельзя продать товар при количестве 0
-
-
-## Демонстрация
-В `demo.py`:
-
-* минимум 3 сценария работы
-* демонстрация валидации
-* демонстрация логических состояний
-* демонстрация изменения состояния
-
----
-
-# Критерии допуска
-
-* Работа выполена полностью(на любую из оценок) и загружена на git
-* Есть демонстрационный файл
-* Наличие README.md-файла в репозитории 
-
----
-
-# Критерии оценки
-
-| Критерий              | Оценка |
-| --------------------- |  ----- |
-| Вариант на 3          |   3    |
-| Вариант на 4          |   4    |
-| Вариант на 5          |   5    |
+![demo](../../images/lab01/run1.png)
