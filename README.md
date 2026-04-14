@@ -84,7 +84,7 @@ print("\n=== END OF DEMONSTRATION ===")
 
 Результат выполнения программы:
 
-![demo](../../images/lab01/run1.png)
+![demo](images/lab01/run1.png)
 
 ---
 
@@ -158,4 +158,4 @@ print("\nDespués de eliminar a Luis:")
 for user in collection.get_all():
     print(user)
 
-![demo](../../images/lab02/demolab2.png)
+![demo](images/lab02/demolab2.png)
