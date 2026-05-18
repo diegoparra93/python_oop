@@ -1,65 +1,68 @@
-from user import User
+from lab01.validate import User
 
-print("=== USER CLASS DEMONSTRATION ===\n")
+def scenario1():
+    print("\nSCENARIO 1: Creation and display")
 
-# 1. CREATING VALID OBJECTS
-try:
-    diego = User("Diego", "O+", 75.5, 25, "diego@email.com", "Madrid")
-    daniel = User("Daniel", "A-", 80.0, 17, "daniel@email.com", "Barcelona")
-    print("Users created successfully")
-except ValueError as e:
-    print(f"Unexpected error: {e}")
+    user1 = User("Diego", "O+", 75.5, 25, "diego@email.com", "Madrid")
+    user2 = User("Daniel", "A-", 80.0, 17, "daniel@email.com", "Barcelona")
 
-# 2. DISPLAY USER INFORMATION (__str__)
-print("\n--- USER INFORMATION ---")
-print(diego)
-print(daniel)
+    print(user1)
+    print(user2)
 
-# 3. CLASS ATTRIBUTE
-print("\n--- CLASS ATTRIBUTE ---")
-print(f"Total users created: {User.total_users}")
+    print(f"repr: {repr(user1)}")
 
-# 4. BUSINESS METHOD (is_adult)
-print("\n--- AGE VERIFICATION ---")
-if diego.is_adult():
-    print(f"{diego._name} is an adult")
-else:
-    print(f"{diego._name} is not an adult")
 
-if daniel.is_adult():
-    print(f"{daniel._name} is an adult")
-else:
-    print(f"{daniel._name} is not an adult")
+def scenario2():
+    print("\nSCENARIO 2: Class attribute and business method")
 
-# 5. COMPARISON (__eq__)
-print("\n--- USER COMPARISON ---")
-if diego == daniel:
-    print("Diego and Daniel are the same user (same email)")
-else:
-    print("Diego and Daniel are different users")
+    user1 = User("Diego", "O+", 75.5, 25, "diego@email.com", "Madrid")
 
-# 6. VALIDATION DEMONSTRATION (with try/except)
-print("\n--- VALIDATION DEMONSTRATION ---")
+    print(f"Total users: {User.total_users}")
 
-# Case 1: Invalid email
-try:
-    invalid_user = User("Error", "O+", 70, 30, "invalid-email", "Seville")
-    print("This should have failed")
-except ValueError as e:
-    print(f"Error captured (invalid email): {e}")
+    if user1.is_adult():
+        print(f"{user1.name} is an adult")
+    else:
+        print(f"{user1.name} is not an adult")
 
-# Case 2: Empty city
-try:
-    invalid_user = User("Error", "O+", 70, 30, "test@email.com", "")
-    print("This should have failed")
-except ValueError as e:
-    print(f"Error captured (empty city): {e}")
 
-# Case 3: Negative age
-try:
-    invalid_user = User("Error", "O+", 70, -5, "test@email.com", "Valencia")
-    print("This should have failed")
-except ValueError as e:
-    print(f"Error captured (negative age): {e}")
+def scenario3():
+    print("\nSCENARIO 3: Comparison")
 
-print("\n=== END OF DEMONSTRATION ===")
+    user1 = User("Diego", "O+", 75.5, 25, "diego@email.com", "Madrid")
+    user2 = User("Daniel", "A-", 80.0, 17, "daniel@email.com", "Barcelona")
+    user3 = User("Test", "O+", 70, 30, "diego@email.com", "Seville")
+
+    print(f"user1 == user2: {user1 == user2}")
+    print(f"user1 == user3: {user1 == user3}")
+
+
+def scenario4():
+    print("\nSCENARIO 4: Validation")
+
+    try:
+        User("Error", "O+", 70, 30, "invalid-email", "Seville")
+    except ValueError as e:
+        print(f"Email error: {e}")
+
+    try:
+        User("Error", "O+", 70, 30, "test@email.com", "")
+    except ValueError as e:
+        print(f"City error: {e}")
+
+    try:
+        User("Error", "O+", 70, -5, "test@email.com", "Valencia")
+    except ValueError as e:
+        print(f"Age error: {e}")
+
+
+def main():
+    print("User class demonstration")
+
+    scenario1()
+    scenario2()
+    scenario3()
+    scenario4()
+
+
+if __name__ == "__main__":
+    main()

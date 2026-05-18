@@ -1,85 +1,180 @@
-# ЛР-1 — Класс и инкапсуляция (Python 3.x)
+# Лабораторная работа 1: Класс и инкапсуляция
+
+## Вопрос 1. Что является сущностью?
+
+Ответ: User
+
+В данной предметной области пользователь — это человек, который взаимодействует с системой.
+
+Пользователь:
+- имеет имя (name)
+- имеет email
+- имеет возраст (age)
+- имеет город (city)
+- имеет группу крови (blood_type)
+- имеет вес (weight)
+
+---
+
+## Вопрос 2. Какие у него атрибуты?
+
+### Атрибуты:
+
+| Атрибут | Тип | Описание |
+|--------|-----|----------|
+| name | строка | имя пользователя |
+| email | строка | email пользователя |
+| age | число | возраст |
+| weight | число | вес |
+| blood_type | строка | группа крови |
+| city | строка | город |
+
+---
+
+### Методы:
+
+| Метод | Описание |
+|------|----------|
+| is_adult() | проверяет, является ли пользователь совершеннолетним |
+
+---
+
+## Вопрос 3. Какие инварианты?
+
+- name не может быть пустым  
+- email должен содержать "@"  
+- age > 0  
+- weight > 0  
+- city не может быть пустым  
+- blood_type должен быть допустимым  
+
+---
+
+## Вопрос 4. Что значит равенство?
+
+Два пользователя считаются равными, если у них одинаковый email.
+
+---
+
+## Вопрос 5. Есть ли состояние?
+
+Да.
+
+Состояние определяется возрастом:
+
+- пользователь может быть совершеннолетним  
+- пользователь может быть несовершеннолетним  
+
+---
 
 ## Цель работы
 
-* Освоить объявление пользовательских классов.
-* Разобраться с инкапсуляцией (атрибуты экземпляра, закрытые поля).
-* Реализовать свойства (`@property`).
-* Переопределить магические методы (`__str__`, `__repr__`, `__eq__`).
-* Осознать разницу между атрибутами класса и экземпляра.
+Освоить:
+- создание пользовательских классов  
+- инкапсуляцию  
+- свойства (@property)  
+- магические методы (__str__, __repr__, __eq__)  
 
 ---
 
-# Результат лабораторной
+## Описание класса User
 
-## Демонстрация
+Класс User моделирует пользователя системы.
 
-### Код программы (demo.py)
-
-```python
-from user import User
-
-print("=== USER CLASS DEMONSTRATION ===\n")
-
-# 1. CREATING VALID OBJECTS
-try:
-    diego = User("Diego", "O+", 75.5, 25, "diego@email.com", "Madrid")
-    daniel = User("Daniel", "A-", 80.0, 17, "daniel@email.com", "Barcelona")
-    print("Users created successfully")
-except ValueError as e:
-    print(f"Unexpected error: {e}")
-
-# 2. DISPLAY USER INFORMATION (__str__)
-print("\n--- USER INFORMATION ---")
-print(diego)
-print(daniel)
-
-# 3. CLASS ATTRIBUTE
-print("\n--- CLASS ATTRIBUTE ---")
-print(f"Total users created: {User.total_users}")
-
-# 4. BUSINESS METHOD (is_adult)
-print("\n--- AGE VERIFICATION ---")
-if diego.is_adult():
-    print(f"{diego._name} is an adult")
-else:
-    print(f"{diego._name} is not an adult")
-
-if daniel.is_adult():
-    print(f"{daniel._name} is an adult")
-else:
-    print(f"{daniel._name} is not an adult")
-
-# 5. COMPARISON (__eq__)
-print("\n--- USER COMPARISON ---")
-if diego == daniel:
-    print("Diego and Daniel are the same user (same email)")
-else:
-    print("Diego and Daniel are different users")
-
-# 6. VALIDATION DEMONSTRATION (with try/except)
-print("\n--- VALIDATION DEMONSTRATION ---")
-
-try:
-    invalid_user = User("Error", "O+", 70, 30, "invalid-email", "Seville")
-except ValueError as e:
-    print(f"Error captured (invalid email): {e}")
-
-try:
-    invalid_user = User("Error", "O+", 70, 30, "test@email.com", "")
-except ValueError as e:
-    print(f"Error captured (empty city): {e}")
-
-try:
-    invalid_user = User("Error", "O+", 70, -5, "test@email.com", "Valencia")
-except ValueError as e:
-    print(f"Error captured (negative age): {e}")
-
-print("\n=== END OF DEMONSTRATION ===")
 ---
-```
-## Демонстрация
 
-Результат выполнения программы:
+### Атрибут класса
 
-![demo](../../images/lab01/run1.png)
+total_users — количество созданных пользователей.
+
+---
+
+### Конструктор
+
+Конструктор принимает:
+
+- name  
+- blood_type  
+- weight  
+- age  
+- email  
+- city  
+
+При создании объекта:
+- выполняется проверка данных  
+- создаются закрытые атрибуты  
+- увеличивается счетчик пользователей  
+
+---
+
+### Свойства (@property)
+
+Используются для доступа к данным:
+
+- name  
+- email  
+- age  
+- weight  
+- blood_type  
+- city  
+
+Сеттеры выполняют проверку данных.
+
+---
+
+### Магические методы
+
+- __str__ — вывод информации  
+- __repr__ — представление объекта  
+- __eq__ — сравнение пользователей по email  
+
+---
+
+### Бизнес-метод
+
+- is_adult() — возвращает True, если возраст ≥ 18  
+
+---
+
+## Демонстрация работы (demo.py)
+
+### Сценарий 1: Создание объектов
+
+Создаются пользователи с корректными данными.
+
+📸 (вставить screenshot)
+
+---
+
+### Сценарий 2: Вывод информации
+
+Используется print() для вывода данных пользователя.
+
+📸 (вставить screenshot)
+
+---
+
+### Сценарий 3: Сравнение объектов
+
+Сравнение пользователей с помощью __eq__.
+
+📸 (вставить screenshot)
+
+---
+
+### Сценарий 4: Валидация
+
+Попытка создать пользователя с некорректными данными:
+- неверный email  
+- пустой город  
+- отрицательный возраст  
+
+📸 (вставить screenshot)
+
+---
+
+### Сценарий 5: Бизнес-логика
+
+Проверка метода is_adult().
+
+📸 (вставить screenshot)
