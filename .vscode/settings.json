@@ -1,0 +1,12 @@
+{
+    "python.analysis.extraPaths": [
+        "./src",
+        "./src/lab01",
+        "./src/lab02",
+        "./src/lab03",
+        "./src/lab04",
+        "./src/lab05",
+        "./src/lab06",
+        "./src/lab07"
+    ]
+}

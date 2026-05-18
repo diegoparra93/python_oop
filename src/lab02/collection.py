@@ -1,4 +1,5 @@
-from model import User
+from lab03.base import User
+
 
 
 class UserCollection:
