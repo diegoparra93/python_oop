@@ -1,4 +1,4 @@
-from lab03.base import User
+from lab02.model import User
 
 
 
@@ -8,8 +8,8 @@ class UserCollection:
         self._items = []
 
     def add(self, user):
-        if not isinstance(user, User):
-            raise TypeError("Only User objects can be added")
+        if not hasattr(user, "name"):
+              raise TypeError("Invalid object")
 
         for existing in self._items:
             if existing.email == user.email:

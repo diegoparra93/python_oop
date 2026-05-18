@@ -1,4 +1,4 @@
-from lab01.validate import User
+from model import User
 
 def scenario1():
     print("\nSCENARIO 1: Creation and display")
